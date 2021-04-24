@@ -2,100 +2,65 @@ package com.hillel.lesson_11;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Main {
 
 
-    public static void main(String[] args) throws IOException{
-
-        Zoo giraffe = new Zoo("giraffe");
-        Zoo crocodile = new Zoo("crocodile");
-        Zoo tiger = new Zoo("tiger");
-        Zoo hippopotamus = new Zoo("hippopotamus");
-        Zoo wolf = new Zoo("wolf");
-        Zoo penguin = new Zoo("penguin");
-        PetShop parrot = new PetShop("parrot");
-        PetShop hamster = new PetShop("hamster");
-        PetShop rat = new PetShop("rat");
-        Shelter dog = new Shelter("dog");
-        Shelter cat = new Shelter("cat");
-        Shelter dove = new Shelter("dove");
+    public static void main(String[] args) throws IOException {
 
 
-        LinkedList linkedList = new LinkedList();
-        linkedList.add(giraffe);
-        linkedList.add(crocodile);
-        linkedList.add(tiger);
-        linkedList.add(hippopotamus);
-        linkedList.add(wolf);
-        linkedList.add(penguin);
-        System.out.println(linkedList.size());
-        System.out.println(linkedList);
-        linkedList.addFirst(parrot);
-        linkedList.addFirst(hamster);
-        linkedList.addFirst(rat);
-        System.out.println(linkedList.size());
-        System.out.println(linkedList);
-        linkedList.set(6,dog);
-        linkedList.set(7,cat);
-        linkedList.set(8,dove);
-        System.out.println(linkedList.size());
-        System.out.println(linkedList);
-
-        ArrayList zooList = new ArrayList();
-        zooList.add(giraffe);
-        zooList.add(crocodile);
-        zooList.add(tiger);
-        zooList.add(hippopotamus);
-        zooList.add(wolf);
-        zooList.add(penguin);
-        ArrayList petshopList = new ArrayList();
-        petshopList.add(parrot);
-        petshopList.add(hamster);
-        petshopList.add(rat);
-        ArrayList shelterList = new ArrayList();
-        shelterList.add(dog);
-        shelterList.add(cat);
-        shelterList.add(dove);
-
-
-
-
-
+        List linkedList = new ArrayList();
+        zoo(linkedList);
+        petshop(linkedList);
     }
-    public void checkList(LinkedList linkedList) {
-        System.out.println(linkedList);
-        int linkedsize = linkedList.size();
-//        int petshopSize = petshopList.size();
-//        int shelterSize = shelterList.size();
-//
-//        while (zooSize < 2) {
-//            zooList.removeAll(zooList);
-//            zooList.add(giraffe);
-//            zooList.add(crocodile);
-//        }
-//        while (petshopSize < 2) {
-//            petshopList.removeAll(petshopList);
-//            petshopList.add(parrot);
-//            petshopList.add(hamster);
-//        }
-//        while (shelterSize < 2) {
-//            shelterList.removeAll(shelterList);
-//            shelterList.add(dog);
-//            shelterList.add(cat);
-//        }
 
+    public static List zoo(List linkedList) {
 
-        int size = linkedList.size();
-//        while (size < 6) {
-//            linkedList.removeAll(linkedList);
-//            linkedList.addAll(zooList);
-//            linkedList.addAll(petshopList);
-//            linkedList.addAll(shelterList);
-//        }
+        if (linkedList.isEmpty()) {
+            for (int i = 0; i < 6; i++) {
+                linkedList.add(new Zoo());
+            }
+            System.out.println(linkedList.size());
+            System.out.println(linkedList);
+            for (int i = 0; i < 3; i++) {
+                linkedList.add(i, new PetShop());
+            }
+            for (int i = linkedList.size() - 1; i > linkedList.size() - 4; i--) {
+                linkedList.set(i, new Shelter());
+            }
 
+            System.out.println(linkedList.toString());
+
+        }
+        return linkedList;
     }
 
 
+    public static List petshop(List linkedList) {
+
+        int a = 0;
+        int b = 0;
+        int c = 0;
+
+        Iterator iterator = linkedList.iterator();
+
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(new Zoo()) && a < 2) {
+                a++;
+            }
+            if (iterator.next().equals(new PetShop()) && b < 2) {
+                b++;
+            }
+            if (iterator.next().equals(new Shelter()) && c < 2) {
+                c++;
+            } else {
+                iterator.remove();
+
+            }
+        }
+        System.out.println(linkedList.toString());
+        return linkedList;
+    }
 }
