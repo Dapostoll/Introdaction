@@ -1,47 +1,42 @@
 package com.hillel.lesson_9.NewHomeWork;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 final public class Support extends User {
     public Support() {
-        super();
     }
 
 
-    @Override
-    public File file() {
-        return super.file();
-    }
 
-    @Override
-    public String enteredTextForConsole(Scanner sc) {
-        return super.enteredTextForConsole(sc);
+    public boolean checkString(String str) throws IOException {
+        String file = "C:\\poem\\myHomework_9.txt";
+//       String consoleTextResult = fileString.transform(String::toString);
+        FileReader fileReader = new FileReader(file);
+        Scanner scannerFileReader = new Scanner(fileReader);
+        boolean isContain = false;
 
-    }
 
-    @Override
-    public Scanner sc() {
-        return super.sc();
-    }
+        while (scannerFileReader.hasNextLine()) {
+            String writedText = scannerFileReader.nextLine();
+            if (writedText.equals(str)) {
+                isContain = true;
 
-    public String stringChecker(String fileString, File pathToFile) throws IOException {
-        System.out.println("Enter text for check in file");
-        BufferedReader reader = new BufferedReader(new FileReader(pathToFile));
-        String value = reader.readLine();
-//        while (value.equalsIgnoreCase(fileString)){
-//            System.out.println(value);
-//        }
-
-        if (fileString.equalsIgnoreCase(value)) {
-            System.out.println("contains");
-//            stringCheckerResult = "contains";
-        } else {
-            System.out.println("does not contain");
-//            stringCheckerResult = "does not contain contain";
+            }
         }
-return value;
-    }
-}
+        scannerFileReader.close();
+        fileReader.close();
+        System.out.println("The entered text is present in the file : " + isContain);
+        scannerFileReader.close();
+        fileReader.close();
+        return isContain;
 
+
+
+
+    }
+
+}
 

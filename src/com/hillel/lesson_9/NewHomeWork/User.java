@@ -1,29 +1,81 @@
 package com.hillel.lesson_9.NewHomeWork;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.io.File;
+
 public class User {
-   public File file(){  File pathToFile = new File("C:\\poem\\myHomework_9.txt"); return pathToFile;}
-    protected String name;
-    protected String surname;
-    protected String email;
-    protected String password;
-    protected String country;
+
+
+
+
+    private String name;
+    private String surname;
+    private String mail;
+    private String password;
+    private String sex;
+    private String country;
 
     public User() {
     }
 
-    public User(String name, String surname, String email, String password, String country) {
+    public User(String name, String surname, String mail, String password, String sex, String country) {
         this.name = name;
         this.surname = surname;
-        this.email = email;
+        this.mail = mail;
         this.password = password;
+        this.sex = sex;
         this.country = country;
+    }
+
+
+
+
+
+    public final void enteredTextForConsole() throws IOException {
+        String file = "C:\\poem\\myHomework_9.txt";
+        FileReader fileReader = new FileReader(file);
+        Scanner scanner = new Scanner(fileReader);
+
+        while (scanner.hasNextLine()){
+            String fileString = scanner.nextLine();
+            System.out.println(fileString);
+        }
+        System.out.println("File have been read");
+
+        scanner.close();
+        fileReader.close();
 
     }
 
+
+    public void writeToFile() throws IOException {
+        String file = "C:\\poem\\myHomework_9.txt";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter text for File");
+        String text = scanner.nextLine();
+        FileWriter fileWriter = new FileWriter(file);
+        System.out.println("You're entered text write to file");
+        fileWriter.write(text);
+
+        scanner.close();
+        fileWriter.close();
+    }
+
+    public void fileCreator() {
+        try {
+            File file = new File("C:\\poem\\myHomework_9.txt");
+            if (file.createNewFile())
+                System.out.println("File created");
+            else
+                System.out.println("File already exists");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 
     public String getName() {
         return name;
@@ -41,12 +93,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {
@@ -55,6 +107,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getCountry() {
@@ -70,34 +130,10 @@ public class User {
         return "User{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
+                ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
                 ", country='" + country + '\'' +
                 '}';
     }
- public String enteredTextForConsole(Scanner sc) {
-    System.out.println("Enter text for Console");
-    String fileString = sc.nextLine();
-     System.out.println(fileString);
-    return fileString;
-}
-
-
-    public  FileWriter writeToFile(File pathToFile, String fileString) throws IOException {
-        System.out.println("You're entered text write to file");
-
-        FileWriter fileWriter = new FileWriter(pathToFile);
-        fileWriter.write(fileString);
-        fileWriter.close();
-        return fileWriter;
-    }
-
-    public  void scannerClose(Scanner sc) {
-        sc.close();
-    }
-
-
-     public Scanner sc(){ Scanner sc = new Scanner(System.in); return sc;}
-
-
 }
